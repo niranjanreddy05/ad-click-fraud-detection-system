@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertiser Dashboard - Fraud Detection</title>
+    <link rel="stylesheet" href="/static/css/advertiser_dashboard.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>📊 Advertiser Dashboard</h1>
+            <div class="user-info">
+                <span id="advertiser-name">Loading...</span>
+                <button id="logout-btn" class="logout-btn">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="analytics">📈 Analytics</button>
+        <button class="tab-btn" data-tab="ads">🎯 My Ads</button>
+        <button class="tab-btn" data-tab="create-ad">➕ Create Ad</button>
+    </nav>
+
+    <main>
+        <!-- Analytics Tab -->
+        <section id="analytics-tab" class="tab-content active">
+            <!-- Statistics Overview -->
+            <div class="stats-overview">
+                <h2>📈 Click Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Clicks</h3>
+                        <div class="stat-value" id="total-clicks">-</div>
+                    </div>
+                    <div class="stat-card genuine">
+                        <h3>Genuine Clicks</h3>
+                        <div class="stat-value" id="genuine-clicks">-</div>
+                    </div>
+                    <div class="stat-card fraud">
+                        <h3>Fraudulent Clicks</h3>
+                        <div class="stat-value" id="fraud-clicks">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Fraud Rate</h3>
+                        <div class="stat-value" id="fraud-rate">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Per-Ad Performance -->
+            <div class="ad-performance">
+                <h2>🎯 Ad Performance</h2>
+                <div id="ad-performance-container">
+                    <div class="loading">Loading ad performance data...</div>
+                </div>
+            </div>
+
+            <!-- Recent Sessions -->
+            <div class="recent-clicks">
+                <h2>🕒 Recent Sessions</h2>
+                <div class="controls">
+                    <button id="refresh-btn">🔄 Refresh</button>
+                    <button id="auto-refresh-btn" class="active">⏱️ Auto Refresh: ON</button>
+                    <span class="refresh-info">Auto-refreshes every 5 seconds</span>
+                </div>
+                <div class="table-container">
+                    <table id="clicks-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Ad</th>
+                                <th>Session ID</th>
+                                <th>Clicks/Session</th>
+                                <th>Min Gap</th>
+                                <th>Max Gap</th>
+                                <th>Status</th>
+                                <th>Risk Level</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="8" class="loading">Loading recent sessions...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Fraud Analysis -->
+            <div class="fraud-analysis">
+                <h2>🔍 Fraud Analysis</h2>
+                <div class="analysis-grid">
+                    <div class="analysis-card">
+                        <h3>Risk Distribution</h3>
+                        <div id="risk-distribution">
+                            <div class="risk-bar">
+                                <span class="risk-label">Low Risk</span>
+                                <div class="risk-progress">
+                                    <div class="risk-fill low" id="low-risk-fill"></div>
+                                </div>
+                                <span class="risk-count" id="low-risk-count">0</span>
+                            </div>
+                            <div class="risk-bar">
+                                <span class="risk-label">Medium Risk</span>
+                                <div class="risk-progress">
+                                    <div class="risk-fill medium" id="medium-risk-fill"></div>
+                                </div>
+                                <span class="risk-count" id="medium-risk-count">0</span>
+                            </div>
+                            <div class="risk-bar">
+                                <span class="risk-label">High Risk</span>
+                                <div class="risk-progress">
+                                    <div class="risk-fill high" id="high-risk-fill"></div>
+                                </div>
+                                <span class="risk-count" id="high-risk-count">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-card">
+                        <h3>Financial Impact</h3>
+                        <div class="financial-metrics">
+                            <div class="metric">
+                                <span class="metric-label">Cost per Click:</span>
+                                <span class="metric-value">$0.50</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Money Lost to Fraud:</span>
+                                <span class="metric-value fraud" id="money-lost">$0.00</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Money Saved:</span>
+                                <span class="metric-value genuine" id="money-saved">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- My Ads Tab -->
+        <section id="ads-tab" class="tab-content">
+            <div class="ads-header">
+                <h2>🎯 My Advertisements</h2>
+                <button id="refresh-ads-btn" class="btn-secondary">🔄 Refresh</button>
+            </div>
+            <div id="ads-container">
+                <div class="loading">Loading your ads...</div>
+            </div>
+        </section>
+
+        <!-- Create Ad Tab -->
+        <section id="create-ad-tab" class="tab-content">
+            <div class="create-ad-form">
+                <h2>➕ Create New Advertisement</h2>
+                <div id="create-ad-message" class="message" style="display: none;"></div>
+                
+                <form id="create-ad-form">
+                    <div class="form-group">
+                        <label for="ad-title">Ad Title *</label>
+                        <input type="text" id="ad-title" name="title" required maxlength="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ad-description">Description *</label>
+                        <textarea id="ad-description" name="description" required maxlength="500" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ad-image-url">Image URL</label>
+                        <input type="url" id="ad-image-url" name="image_url" placeholder="https://example.com/image.jpg">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ad-target-url">Target URL *</label>
+                        <input type="url" id="ad-target-url" name="target_url" required placeholder="https://example.com">
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="create-ad-btn">Create Advertisement</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="/static/js/advertiser_dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+/* User Dashboard Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Content Section */
+.content-section {
+    margin-bottom: 3rem;
+}
+
+.content-section h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.content-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.content-card:hover {
+    transform: translateY(-5px);
+}
+
+.content-card h3 {
+    color: #667eea;
+    margin-bottom: 0.5rem;
+}
+
+.read-time {
+    color: #666;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Ads Section */
+.ads-section {
+    margin-bottom: 3rem;
+}
+
+.ads-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.ads-section h2 {
+    color: #e74c3c;
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.auto-refresh-status {
+    display: flex;
+    align-items: center;
+}
+
+.refresh-indicator {
+    background: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid #3498db;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.ads-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.ad-card {
+    background: white;
+    border: 2px solid #e74c3c;
+    border-radius: 8px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.ad-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 20px rgba(231, 76, 60, 0.3);
+}
+
+.ad-card.clicked {
+    background: #fff5f5;
+    border-color: #c0392b;
+}
+
+.ad-badge {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    background: #e74c3c;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.ad-card h3 {
+    color: #e74c3c;
+    margin-bottom: 0.5rem;
+}
+
+.ad-card p {
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+.advertiser-name {
+    color: #666;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.loading {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    grid-column: 1 / -1;
+}
+
+/* Session Info */
+.session-info {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.session-info h3 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.session-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.session-stats span {
+    background: #f8f9fa;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border-left: 3px solid #667eea;
+}
+
+.session-stats code {
+    background: #e9ecef;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    color: #495057;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+
+.close:hover {
+    color: #000;
+}
+
+.fraud-info {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.fraud-info p {
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content-grid, .ads-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .session-stats {
+        flex-direction: column;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Platform - Ad Click Fraud Detection Demo</title>
+    <link rel="stylesheet" href="/static/css/user_dashboard.css">
+</head>
+<body>
+    <header>
+        <h1>📱 Content Platform</h1>
+        <p>Discover amazing content and products</p>
+    </header>
+
+    <main>
+        <!-- Content Section -->
+        <section class="content-section">
+            <h2>📰 Latest Articles</h2>
+            <div class="content-grid">
+                <article class="content-card">
+                    <h3>Tech News: AI Revolution</h3>
+                    <p>Artificial Intelligence is transforming industries worldwide...</p>
+                    <span class="read-time">5 min read</span>
+                </article>
+                <article class="content-card">
+                    <h3>Lifestyle: Healthy Living Tips</h3>
+                    <p>Discover simple ways to improve your daily wellness routine...</p>
+                    <span class="read-time">3 min read</span>
+                </article>
+                <article class="content-card">
+                    <h3>Business: Market Trends 2024</h3>
+                    <p>Key insights into emerging market opportunities...</p>
+                    <span class="read-time">7 min read</span>
+                </article>
+            </div>
+        </section>
+
+        <!-- Ads Section -->
+        <section class="ads-section">
+            <div class="ads-header">
+                <h2>🎯 Sponsored Content</h2>
+                <div class="auto-refresh-status">
+                    <span class="refresh-indicator">🔄 Auto-refreshing every 5 seconds</span>
+                </div>
+            </div>
+            <div id="ads-container" class="ads-grid">
+                <!-- Ads will be loaded here dynamically -->
+                <div class="loading">Loading ads...</div>
+            </div>
+        </section>
+
+        <!-- Session Info (for demo purposes) -->
+        <section class="session-info">
+            <h3>📊 Session Info (Demo)</h3>
+            <div class="session-stats">
+                <span>Session ID: <code id="session-id">-</code></span>
+                <span>Clicks This Session: <code id="click-count">0</code></span>
+                <span>Session Duration: <code id="session-duration">0s</code></span>
+                <span>Last Click Gap: <code id="last-click-gap">-</code></span>
+            </div>
+        </section>
+    </main>
+
+    <!-- Click Feedback Modal -->
+    <div id="click-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>🎉 Thanks for your interest!</h3>
+            <p id="modal-message">Click recorded successfully.</p>
+            <div id="fraud-info" class="fraud-info" style="display: none;">
+                <p><strong>Fraud Analysis (Demo):</strong></p>
+                <p>Risk Level: <span id="risk-level">-</span></p>
+                <p>Probability: <span id="fraud-prob">-</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/user_dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,640 @@
+/* Advertiser Dashboard Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+header {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    padding: 1.5rem 0;
+    margin-bottom: 2rem;
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#advertiser-name {
+    font-weight: 500;
+}
+
+.logout-btn {
+    padding: 0.5rem 1rem;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover {
+    background: #c0392b;
+}
+
+/* Tab Navigation */
+.tab-nav {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.tab-btn {
+    padding: 0.75rem 1.5rem;
+    background: white;
+    border: 2px solid #dee2e6;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+    color: #6c757d;
+}
+
+.tab-btn:hover {
+    background: #f8f9fa;
+    border-color: #adb5bd;
+}
+
+.tab-btn.active {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Section Styles */
+.stats-overview,
+.ad-performance,
+.recent-clicks,
+.fraud-analysis {
+    background: white;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.stats-overview h2,
+.ad-performance h2,
+.recent-clicks h2,
+.fraud-analysis h2 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 0.5rem;
+}
+
+/* Ads Management */
+.ads-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+.ads-header h2 {
+    margin: 0;
+    border: none;
+    padding: 0;
+}
+
+.btn-secondary {
+    padding: 0.5rem 1rem;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+.ads-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.ad-item {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ad-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.ad-item h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.ad-item p {
+    color: #6c757d;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.ad-status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.ad-status.active {
+    background: #d4edda;
+    color: #155724;
+}
+
+.ad-status.inactive {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.ad-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.ad-stat {
+    text-align: center;
+}
+
+.ad-stat-value {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #2c3e50;
+}
+
+.ad-stat-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+/* Create Ad Form */
+.create-ad-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.create-ad-form h2 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #dee2e6;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background: #2980b9;
+}
+
+.btn-primary:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.message {
+    padding: 0.75rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Statistics Overview */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.stat-card {
+    background: #ecf0f1;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    border-left: 4px solid #3498db;
+}
+
+.stat-card.genuine {
+    border-left-color: #27ae60;
+}
+
+.stat-card.fraud {
+    border-left-color: #e74c3c;
+}
+
+.stat-card h3 {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Ad Performance */
+.ad-performance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.ad-card {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.ad-card h4 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.ad-metrics {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}
+
+.ad-metric {
+    text-align: center;
+}
+
+.ad-metric-value {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.ad-metric-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+/* Recent Clicks Table */
+.controls {
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.refresh-info {
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.controls button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+#refresh-btn {
+    background: #3498db;
+    color: white;
+}
+
+#refresh-btn:hover {
+    background: #2980b9;
+}
+
+#auto-refresh-btn {
+    background: #95a5a6;
+    color: white;
+}
+
+#auto-refresh-btn.active {
+    background: #27ae60;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+}
+
+tr:hover {
+    background: #f8f9fa;
+}
+
+.status-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.status-genuine {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-fraud {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.risk-low {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.risk-medium {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.risk-high {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Fraud Analysis */
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.analysis-card {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.analysis-card h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+/* Risk Distribution */
+.risk-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.risk-label {
+    min-width: 100px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.risk-progress {
+    flex: 1;
+    height: 20px;
+    background: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.risk-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.risk-fill.low {
+    background: #28a745;
+}
+
+.risk-fill.medium {
+    background: #ffc107;
+}
+
+.risk-fill.high {
+    background: #dc3545;
+}
+
+.risk-count {
+    min-width: 40px;
+    text-align: right;
+    font-weight: bold;
+}
+
+/* Financial Metrics */
+.financial-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: white;
+    border-radius: 5px;
+    border-left: 4px solid #3498db;
+}
+
+.metric-label {
+    font-weight: 500;
+}
+
+.metric-value {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.metric-value.fraud {
+    color: #e74c3c;
+}
+
+.metric-value.genuine {
+    color: #27ae60;
+}
+
+/* Loading and Error States */
+.loading {
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+    padding: 2rem;
+}
+
+.error {
+    text-align: center;
+    color: #e74c3c;
+    padding: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .analysis-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .controls {
+        flex-direction: column;
+    }
+    
+    .risk-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+    
+    .metric {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+}
