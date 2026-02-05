@@ -16,6 +16,8 @@ from database import (
     authenticate_advertiser, create_ad,
     get_advertiser_ads, get_ad_with_advertiser
 )
+from feature_builder import FeatureBuilder
+from keras_loader import load_keras_model_safe
 
 # -------------------- FASTAPI APP --------------------
 
@@ -49,16 +51,20 @@ def load_model():
     try:
         print("Loading ML model and preprocessor...")
 
-        classifier = joblib.load("training/xgb_backend_model.pkl")
-        scaler = joblib.load("training/backend_scaler.pkl")
+        # Load ANN model and preprocessor
+        classifier = load_keras_model_safe("training/ann_click_fraud_model.h5")
+        scaler = joblib.load("training/ann_preprocessor.pkl")
 
+        if classifier is None:
+            raise RuntimeError("Failed to load ANN model")
 
-        print(f"Model expects {classifier.n_features_in_} features")
+        # ANN model input shape check (optional, handled by keras)
+        # print(f"Model expects {classifier.input_shape} features")
 
         model["classifier"] = classifier
         model["scaler"] = scaler
 
-        model_name = "XGBoost Click Fraud Detection Model"
+        model_name = "ANN Click Fraud Detection Model"
 
         print("SUCCESS: Model loaded correctly")
 
@@ -161,13 +167,10 @@ async def login(data: LoginRequest, response: Response):
     return {"message": "Login successful"}
 
 
-from feature_builder import FeatureBuilder
-
-
 @app.post("/predict", response_model=PredictionResponse)
 async def predict(click: ClickData):
 
-    if model is None:
+    if model["classifier"] is None:
         raise HTTPException(status_code=503, detail="Model not loaded")
 
     ad_info = get_ad_with_advertiser(click.ad_id)
@@ -177,21 +180,14 @@ async def predict(click: ClickData):
     classifier = model["classifier"]
     scaler = model["scaler"]
 
-    # Build features - use realistic values for first click
-    session_duration = max(click.session_duration_minutes, 1.0)  # Minimum 1 minute
-    click_frequency = click.clicks_per_session / session_duration
-    
-    X = pd.DataFrame([{
-        "click_frequency": click_frequency,
-        "time_since_last_click": click.time_gap_seconds,
-        "VPN_usage": 0,
-        "proxy_usage": 0,
-        "bot_likelihood_score": min(click_frequency / 10, 1.0)
-    }])
+    # Build features using FeatureBuilder
+    X = FeatureBuilder.build(click)
 
-    X_scaled = scaler.transform(X)
+    # Preprocess features
+    X_processed = scaler.transform(X)
 
-    fraud_prob = float(classifier.predict_proba(X_scaled)[0][1])
+    # Predict
+    fraud_prob = float(classifier.predict(X_processed)[0][0])
     fraud_prob = max(fraud_prob, 0.001)
 
     is_fraud = fraud_prob >= 0.5
@@ -223,7 +219,7 @@ async def predict(click: ClickData):
 async def health():
     return {
         "status": "running",
-        "model_loaded": model is not None,
+        "model_loaded": model["classifier"] is not None,
         "model_name": model_name
     }
 
@@ -349,7 +345,7 @@ async def health_check():
     return {
         "message": "Ad Click Fraud Detection API",
         "status": "running",
-        "model_loaded": model is not None,
+        "model_loaded": model["classifier"] is not None,
         "model_name": model_name
     }
 
@@ -357,10 +353,11 @@ async def health_check():
 
 @app.get("/model/info")
 async def model_info():
+    classifier = model["classifier"]
     return {
         "model_name": model_name,
-        "model_type": type(model["classifier"]).__name__,
-        "features_expected": model["classifier"].n_features_in_
+        "model_type": type(classifier).__name__,
+        "features_expected": classifier.input_shape[1] if hasattr(classifier, "input_shape") else "Unknown"
     }
 
 
