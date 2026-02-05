@@ -10,8 +10,6 @@ class FeatureBuilder:
 
     @staticmethod
     def build(click):
-        now = datetime.utcnow()
-
         # Derive behavior patterns
         click_frequency = click.clicks_per_session / max(click.session_duration_minutes, 0.1)
 
@@ -38,7 +36,15 @@ class FeatureBuilder:
         ad_position = "Top"
         device_ip_reputation = "Bad" if bot_score > 0.6 else "Good"
 
-        # Final feature row (MATCHES TRAINING SCHEMA)
+        # Final feature row (MATCHES TRAINING SCHEMA FOR ANN)
+        # Required numeric columns:
+        # 'click_duration', 'scroll_depth', 'mouse_movement', 'keystrokes_detected',
+        # 'click_frequency', 'time_since_last_click', 'bot_likelihood_score',
+        # 'VPN_usage', 'proxy_usage'
+        #
+        # Required categorical columns:
+        # 'device_type', 'browser', 'operating_system', 'ad_position', 'device_ip_reputation'
+
         row = {
             "device_type": device_type,
             "browser": browser,
@@ -57,11 +63,6 @@ class FeatureBuilder:
             "VPN_usage": 1 if bot_score > 0.7 else 0,
             "proxy_usage": 1 if bot_score > 0.7 else 0,
             "bot_likelihood_score": bot_score,
-
-            "click_hour": now.hour,
-            "click_day": now.day,
-            "click_weekday": now.weekday(),
-            "is_weekend": 1 if now.weekday() >= 5 else 0,
         }
 
         return pd.DataFrame([row])
