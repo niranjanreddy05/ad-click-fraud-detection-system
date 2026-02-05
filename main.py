@@ -108,9 +108,9 @@ class PredictionResponse(BaseModel):
 
 
 def get_risk_level(prob: float) -> str:
-    if prob < 0.2:
+    if prob < 0.1:
         return "Low"
-    elif prob < 0.6:
+    elif prob < 0.8:
         return "Medium"
     else:
         return "High"
